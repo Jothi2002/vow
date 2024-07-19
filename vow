@@ -1,0 +1,52 @@
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+#include <string>
+#include<cctype>
+using namespace std;
+
+string distinctvowels(char str[], int n) {
+    unordered_map<char, int> mp;
+    int count=0;
+    int max_count = 0;
+    string max_str = "";
+    string c_str = "";
+    
+    for (int i = 0; i < n; i++) {
+        char c = tolower(str[i]);
+        if(c=='a' || c=='e' || c=='i' || c=='o' || c=='u' || c=='A' || c=='E' || c=='I' || c=='O' || c=='U') {
+            if (mp[c]==0) {
+                count++;
+                mp[c]++;
+            }
+            c_str += str[i];
+        } else if (c == ' ' || c=='\0') {
+            if (count>max_count) {
+                max_count =count;
+                max_str = c_str;
+            }
+            count = 0;
+            mp.clear();
+            c_str = "";
+        } else {
+            c_str += str[i];
+           
+        }
+    }
+    if(max_str=="")
+    {
+        cout<<"no vowels in that";
+    }
+  
+    return max_str;
+   
+}
+
+int main() {
+    char arr[] = "gnpm";
+    int n = sizeof(arr)/sizeof(arr[0]);  
+    string res = distinctvowels(arr, n);
+   
+    cout<<res;
+    return 0;
+}
